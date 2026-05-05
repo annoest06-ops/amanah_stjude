@@ -20,7 +20,9 @@ def home():
         return redirect(url_for('login_route'))
     return redirect(url_for('dashboard'))
 
-
+@app.route("/health")
+def health():
+    return "OK", 200
 
 
 @app.route('/dashboard_route')
