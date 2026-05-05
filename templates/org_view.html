@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organization Properties</title>
+
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+        <div class="col-5">
+                                <button type="button" class="btn btn-success w-20"><a href="{{ url_for('dashboard') }}" class="text-white text-decoration-none">Back</a>
+                                </button>
+                            </div>
+
+<div class="container mt-4">
+
+    <h4 class="mb-3">Organization Properties</h4>
+
+    {% if cools %}
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+
+            <table class="table table-bordered table-striped mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cool in cools %}
+                    <tr>
+                        <td>{{ cool.item_name }}</td>
+                        <td>{{ cool.location }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    {% else %}
+        <div class="alert alert-warning">
+            No records found
+        </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>

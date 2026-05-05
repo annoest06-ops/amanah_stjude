@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Item Check</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+        <div class="col-5">
+                                <button type="button" class="btn btn-success w-20"><a href="{{ url_for('dashboard') }}" class="text-white text-decoration-none">Back</a>
+                                </button>
+                            </div>
+
+<div class="container mt-4">
+
+    <h4 class="mb-3">Student Item Check</h4>
+
+    {% if passed %}
+
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+
+            <table class="table table-bordered table-striped mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Date Received</th>
+                        <th>Name</th>
+                        <th>Form</th>
+                        <th>Item</th>
+                        <th>Staff Issued</th>
+                        <th>Date Issued</th>
+                        <th>Sign</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for passes in passed %}
+                    <tr>
+
+                        <form action="/student_item_check" method="POST">
+
+                            <td>{{ passes.date }}</td>
+
+                            <td>
+                                <input type="text" name="st_name" value="{{ passes.name }}" class="form-control form-control-sm" readonly>
+                            </td>
+
+                            <td>{{ passes.form }}</td>
+                            <td>{{ passes.item }}</td>
+
+                            <td>
+                                <input type="text" name="staff_name" class="form-control form-control-sm" placeholder="Staff name">
+                            </td>
+
+                            <td>
+                                <input type="date" name="date_update" class="form-control form-control-sm">
+                            </td>
+
+                            <td>
+                                <input type="checkbox" name="sign" value="mdimi">
+                            </td>
+
+                            <td>
+                                <button type="submit" class="btn btn-sm btn-success">Allow</button>
+                            </td>
+
+                        </form>
+
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    {% else %}
+
+        <div class="alert alert-warning">
+            No data found!
+        </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Check</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+        <div class="col-5">
+                                <button type="button" class="btn btn-success w-20"><a href="{{ url_for('dashboard') }}" class="text-white text-decoration-none">Back</a>
+                                </button>
+                            </div>
+
+<div class="container mt-4">
+
+    <h4 class="mb-3">Visitor Management</h4>
+
+    {% if sets %}
+
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+
+            <table class="table table-bordered table-striped mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>ID</th>
+                        <th>Contact</th>
+                        <th>Category</th>
+                        <th>Destination</th>
+                        <th>Reason</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                        <th>Update Time</th>
+                        <th>Sign</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for set in sets %}
+                    <tr>
+
+                        <form action="/visitor_check" method="POST">
+
+                            <td>{{ set.date }}</td>
+                            <td>{{ set.name }}</td>
+
+                            <td>
+                                <input type="text" name="id_no" value="{{ set.sj_id }}" class="form-control form-control-sm" readonly>
+                            </td>
+
+                            <td>{{ set.contact }}</td>
+                            <td>{{ set.category }}</td>
+                            <td>{{ set.destination }}</td>
+                            <td>{{ set.reason }}</td>
+                            <td>{{ set.status }}</td>
+                            <td>{{ set.time_in }}</td>
+
+                            <td>
+                                <input type="time" name="time_update" class="form-control form-control-sm">
+                            </td>
+
+                            <td>
+                                <input type="text" name="sign" class="form-control" required>
+                            </td>
+
+                            <td>
+                                <button type="submit" class="btn btn-sm btn-success">Allow</button>
+                            </td>
+
+                        </form>
+
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    {% else %}
+
+        <div class="alert alert-warning mt-3">
+            No visitor records found.
+        </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

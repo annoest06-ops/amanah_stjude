@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Check</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+        <div class="col-5">
+                                <button type="button" class="btn btn-success w-20"><a href="{{ url_for('dashboard') }}" class="text-white text-decoration-none">Back</a>
+                                </button>
+                            </div>
+
+<div class="container mt-4">
+
+    <h4 class="mb-3">Report Check</h4>
+
+    <!-- SEARCH FORM -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <form action="/report_check" method="POST" class="row g-3 align-items-end">
+
+                <div class="col-md-4">
+                    <label class="form-label">Date</label>
+                    <input type="date" name="date" class="form-control">
+                </div>
+
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">Search</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- REPORT RESULT -->
+    {% if sets %}
+
+    <form action="/update" method="POST">
+
+        {% for set in sets %}
+
+        <div class="card shadow-sm mb-3">
+            <div class="card-body">
+
+                <p><strong>Shift:</strong> {{ set.shift }}</p>
+                <p><strong>Date:</strong> {{ set.date }}</p>
+
+                <div class="mb-3">
+                    <label class="form-label">Details</label>
+                    <textarea class="form-control" readonly>{{ set.detail }}</textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Comments</label>
+                    <textarea class="form-control" readonly>{{ set.comment }}</textarea>
+                </div>
+
+                <p><strong>Time In:</strong> {{ set.time_in }}</p>
+
+                <div class="mb-3">
+                    <label class="form-label">Sign In</label>
+                    <input type="text" name="sign_in" value="{{ set.sign_in }}" class="form-control" readonly>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Time Out</label>
+                    <input type="time" name="time_out" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Sign Out</label>
+                    <input type="text" name="sign_out"  class="form-control" required>
+                </div>
+
+    
+
+                <button type="submit" class="btn btn-success">Submit Update</button>
+
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </form>
+
+    {% else %}
+
+        <div class="alert alert-warning">
+            No reports found for the selected date.
+        </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
